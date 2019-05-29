@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import { Route, BrowserRouter as Router } from "react-router-dom";
+import ImageWrapper from "./components/image-wrapper";
+import SealPicker from "./components/seal-picker";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <nav>
+        <div className="nav-wrapper">
+          <a href="#" class="brand-logo">
+            Seal Training Admin UI
+          </a>
+        </div>
+      </nav>
+      <div className="divider" />
+      <div className="section">
+        <Router>
+          <Route path="/" component={SealPicker} />
+          <Route path="/:seal" component={ImageWrapper} />
+        </Router>
+      </div>
     </div>
   );
 }
