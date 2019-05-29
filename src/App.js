@@ -8,8 +8,8 @@ function App() {
   return (
     <div className="container">
       <nav>
-        <div className="nav-wrapper">
-          <a href="#" class="brand-logo">
+        <div className="nav-wrapper blue-grey">
+          <a href="#" className="brand-logo">
             Seal Training Admin UI
           </a>
         </div>
