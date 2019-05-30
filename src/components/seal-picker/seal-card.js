@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 export default function({ seal }) {
   return (
-    <a className="waves-effect waves-light btn" href={`/${seal}`}>
+    <Link className="waves-effect waves-light btn" to={`/${seal}`}>
       {seal}
-    </a>
+    </Link>
   );
 }
