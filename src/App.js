@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { Route, BrowserRouter as Router } from "react-router-dom";
+import { Route, HashRouter as Router } from "react-router-dom";
 import ImageWrapper from "./components/image-wrapper";
 import SealPicker from "./components/seal-picker";
 
