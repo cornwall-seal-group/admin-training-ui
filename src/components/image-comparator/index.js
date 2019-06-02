@@ -1,24 +1,27 @@
 import React from "react";
+export default function({ id, baseUrl, seal }) {
+  const { seal: orignalSeal, predictions = [] } = seal;
 
-export default function({ baseUrl, id, seal }) {
   return (
     <div className="row">
-      <h5>Image: {id}</h5>
+      <h5>Image: {orignalSeal}</h5>
       <div className="col s6 grey lighten-3">
         <img
           className="responsive-img"
-          key={`orig${id}`}
-          src={`${baseUrl}/${seal}/originals/${id}.jpg`}
-          alt="Original img for {id}"
+          key={`orig${orignalSeal}`}
+          src={`${baseUrl}/${id}/originals/${orignalSeal}`}
+          alt="Original img for {orignalSeal}"
         />
       </div>
       <div className="col s6 grey lighten-2">
-        <img
-          className="responsive-img"
-          key={`head${id}`}
-          src={`${baseUrl}/${seal}/heads/${id}.jpg`}
-          alt="Original img for {id}"
-        />
+        {predictions.map(prediction => (
+          <img
+            className="responsive-img"
+            key={`prediction${prediction}`}
+            src={`${baseUrl}/${id}/predictions/${prediction}`}
+            alt="Original img for {prediction}"
+          />
+        ))}
       </div>
     </div>
   );
