@@ -6,7 +6,7 @@ export default class ImageWrapper extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ids: []
+      seals: []
     };
   }
 
@@ -24,8 +24,20 @@ export default class ImageWrapper extends Component {
 
     Axios.get(url).then(({ data }) => {
       const split = data.split("\n");
-      const ids = split.splice(0, split.length - 1);
-      this.setState({ ids });
+      const storedSeals = split.splice(0, split.length - 1);
+      const seals = storedSeals.reduce((acc, seal) => {
+        const imagesPerSeal = seal.split(",");
+        const originalImg = imagesPerSeal[0];
+        const predictions = imagesPerSeal.slice(1);
+
+        acc.push({
+          seal: originalImg,
+          predictions
+        });
+
+        return acc;
+      }, []);
+      this.setState({ seals });
     });
   }
 
@@ -42,13 +54,18 @@ export default class ImageWrapper extends Component {
   }
 
   render() {
-    const { ids } = this.state;
-    const seal = this.getSealFromProps(this.props);
+    const { seals } = this.state;
+    const sealID = this.getSealFromProps(this.props);
     return (
       <div>
-        <h2>Images for {seal}</h2>
-        {ids.map(id => (
-          <ImageComparator key={id} id={id} seal={seal} baseUrl={baseUrl} />
+        <h2>Images for {sealID}</h2>
+        {seals.map(seal => (
+          <ImageComparator
+            key={sealID}
+            id={sealID}
+            seal={seal}
+            baseUrl={baseUrl}
+          />
         ))}
       </div>
     );
