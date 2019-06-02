@@ -16,6 +16,19 @@ export default class ImageWrapper extends Component {
     return seal;
   }
 
+  comparePredictions(a, b) {
+    const predA = parseFloat(a.percentage);
+    const predB = parseFloat(b.percentage);
+
+    let comparison = 0;
+    if (predA < predB) {
+      comparison = 1;
+    } else if (predA > predB) {
+      comparison = -1;
+    }
+    return comparison;
+  }
+
   fetchImages() {
     const { match } = this.props;
     const { params } = match;
@@ -32,7 +45,20 @@ export default class ImageWrapper extends Component {
 
         acc.push({
           seal: originalImg,
-          predictions
+          predictions: predictions
+            .reduce((acc, prediction) => {
+              const predictionSplit = prediction.split("-");
+              const name = predictionSplit[predictionSplit.length - 1];
+              const ext = name.lastIndexOf(".");
+              const percentage = name.substr(0, ext);
+
+              acc.push({
+                percentage: (percentage * 100).toFixed(2),
+                image: prediction
+              });
+              return acc;
+            }, [])
+            .sort(this.comparePredictions)
         });
 
         return acc;
@@ -49,6 +75,7 @@ export default class ImageWrapper extends Component {
     if (
       this.getSealFromProps(this.props) !== this.getSealFromProps(prevProps)
     ) {
+      console.warn("going to fetch");
       this.fetchImages();
     }
   }
@@ -56,6 +83,7 @@ export default class ImageWrapper extends Component {
   render() {
     const { seals } = this.state;
     const sealID = this.getSealFromProps(this.props);
+    console.warn(sealID);
     return (
       <div>
         <h2>Images for {sealID}</h2>
