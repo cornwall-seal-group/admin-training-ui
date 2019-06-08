@@ -1,7 +1,7 @@
 import React from "react";
 import SealOriginal from "./seal-original";
 import SealPrediction from "./seal-prediction";
-export default function({ id, baseUrl, seal }) {
+export default function({ id, baseUrl, seal, iteration }) {
   const { seal: orignalSeal, predictions = [] } = seal;
 
   return (
@@ -21,6 +21,7 @@ export default function({ id, baseUrl, seal }) {
             <SealPrediction
               baseUrl={baseUrl}
               id={id}
+              iteration={iteration}
               percentage={prediction.percentage}
               image={prediction.image}
               key={prediction.image}

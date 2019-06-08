@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import ImageComparator from "../image-comparator";
 import Axios from "axios";
-import { baseUrl } from "../../config.json";
+import { baseUrl, iteration } from "../../config.json";
 export default class ImageWrapper extends Component {
   constructor(props) {
     super(props);
@@ -33,7 +33,7 @@ export default class ImageWrapper extends Component {
     const { match } = this.props;
     const { params } = match;
     const { seal } = params;
-    const url = baseUrl + "/" + seal + "/" + seal + ".csv";
+    const url = baseUrl + "/" + seal + "/" + seal + "-" + iteration + ".csv";
 
     Axios.get(url).then(({ data }) => {
       const split = data.split("\n");
@@ -93,6 +93,7 @@ export default class ImageWrapper extends Component {
             id={sealID}
             seal={seal}
             baseUrl={baseUrl}
+            iteration={iteration}
           />
         ))}
       </div>
