@@ -1,27 +1,28 @@
 import React from "react";
 import "./App.css";
 import { Route, HashRouter as Router } from "react-router-dom";
-import ImageWrapper from "./components/image-wrapper";
-import SealPicker from "./components/seal-picker";
 
+import Menu from "./components/menu";
+import ProjectScreen from "./screens/project-screen";
 function App() {
   return (
-    <div className="container">
-      <nav>
-        <div className="nav-wrapper blue-grey">
-          <a href="#" className="brand-logo">
-            Seal Training Admin UI
-          </a>
+    <>
+      <Menu />
+
+      <main>
+        <div className="section" id="index-banner">
+          <div className="fullscreen">
+            <div className="row">
+              <div className="col s12 m12 xl12">
+                <Router>
+                  <Route path="/project/:id" component={ProjectScreen} />
+                </Router>
+              </div>
+            </div>
+          </div>
         </div>
-      </nav>
-      <div className="divider" />
-      <div className="section">
-        <Router>
-          <Route path="/" component={SealPicker} />
-          <Route path="/:seal" component={ImageWrapper} />
-        </Router>
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
 
