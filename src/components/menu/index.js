@@ -1,6 +1,6 @@
 import { Navbar, Dropdown } from "react-materialize";
 import React, { Component } from "react";
-import { trainingKey } from "../../../config.json";
+import { trainingKey } from "../../config.json";
 import Axios from "axios";
 
 export default class Menu extends Component {
