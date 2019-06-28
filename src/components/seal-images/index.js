@@ -51,11 +51,13 @@ export default class SealImages extends Component {
               const name = predictionSplit[predictionSplit.length - 1];
               const ext = name.lastIndexOf(".");
               const percentage = name.substr(0, ext);
+              if (predictions.length < 3 || percentage > 0.12) {
+                acc.push({
+                  percentage: (percentage * 100).toFixed(2),
+                  image: prediction
+                });
+              }
 
-              acc.push({
-                percentage: (percentage * 100).toFixed(2),
-                image: prediction
-              });
               return acc;
             }, [])
             .sort(this.comparePredictions)
