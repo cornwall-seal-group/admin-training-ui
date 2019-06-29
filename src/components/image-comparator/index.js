@@ -2,18 +2,18 @@ import React from "react";
 import SealOriginal from "./seal-original";
 import SealPrediction from "./seal-prediction";
 export default function({ id, baseUrl, seal, iteration }) {
-  const { seal: orignalSeal, predictions = [] } = seal;
+  const { seal: originalSeal, predictions = [] } = seal;
 
   return (
     <div className="row grey lighten-3 card">
-      <div className="card-title grey lighten-2">Image: {orignalSeal}</div>
+      <div className="card-title grey lighten-2">Image: {originalSeal}</div>
       <div className="card-content">
         <div className="col s6">
           <SealOriginal
             baseUrl={baseUrl}
             id={id}
-            image={orignalSeal}
-            key={orignalSeal}
+            image={originalSeal.replace(".jpg", ".jpeg")}
+            key={originalSeal}
           />
         </div>
         <div className="col s6">
