@@ -2,6 +2,7 @@ import { Navbar, Dropdown } from "react-materialize";
 import React, { Component } from "react";
 import { trainingKey } from "../../config.json";
 import Axios from "axios";
+import { Link } from "react-router-dom";
 
 export default class Menu extends Component {
   constructor(props) {
@@ -57,22 +58,28 @@ export default class Menu extends Component {
     const { projects = [] } = this.state;
     return (
       <Navbar brand={<a />} alignLinks="right">
-        {projects.map(project => (
-          <Dropdown trigger={<a href="#">{project.name}</a>}>
-            {project.iterations &&
-              project.iterations.map(iter => (
-                <a
-                  key={iter.id}
-                  href={`#project/${iter.id}?project=${
-                    project.name
-                  }&iterationName=${iter.publishName}`}
-                  disabled={iter.publishName === ""}
-                >
-                  {iter.publishName} ({iter.name})
-                </a>
-              ))}
-          </Dropdown>
-        ))}
+        <Link to={`/classifier`}>Classifier Results</Link>
+        {projects.map(project => {
+          if (project.name.indexOf("Detection") === -1) {
+            return "";
+          }
+          return (
+            <Dropdown trigger={<a href="#">{project.name}</a>}>
+              {project.iterations &&
+                project.iterations.map(iter => (
+                  <a
+                    key={iter.id}
+                    href={`#project/${iter.id}?project=${
+                      project.name
+                    }&iterationName=${iter.publishName}`}
+                    disabled={iter.publishName === ""}
+                  >
+                    {iter.publishName} ({iter.name})
+                  </a>
+                ))}
+            </Dropdown>
+          );
+        })}
       </Navbar>
     );
   }

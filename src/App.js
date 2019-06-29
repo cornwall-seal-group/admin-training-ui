@@ -8,7 +8,7 @@ import ClassifierScreen from "./screens/classifier-tester";
 
 function App() {
   return (
-    <>
+    <Router>
       <Menu />
 
       <main>
@@ -16,16 +16,14 @@ function App() {
           <div className="fullscreen">
             <div className="row">
               <div className="col s12 m12 xl12">
-                <Router>
-                  <Route path="/project/:id" component={ProjectScreen} />
-                  <Route path="/classifier/" component={ClassifierScreen} />
-                </Router>
+                <Route path="/project/:id" component={ProjectScreen} />
+                <Route path="/classifier" component={ClassifierScreen} />
               </div>
             </div>
           </div>
         </div>
       </main>
-    </>
+    </Router>
   );
 }
 
